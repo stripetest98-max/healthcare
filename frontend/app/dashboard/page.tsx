@@ -197,7 +197,9 @@ export default function DashboardPage() {
             {/* Profile Edit Modal */}
             <Dialog open={profileModalOpen} onOpenChange={setProfileModalOpen}>
               <DialogTrigger asChild>
-                <Button>Edit Profile</Button>
+                <Button className="bg-blue-900 hover:bg-blue-800 text-white">
+                  Edit Profile
+                </Button>
               </DialogTrigger>
               <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
@@ -357,7 +359,7 @@ export default function DashboardPage() {
                   </div>
 
                   <div className="flex gap-4 pt-4">
-                    <Button type="submit" disabled={saving} className="flex-1">
+                    <Button type="submit" disabled={saving} className="flex-1 bg-blue-900 hover:bg-blue-800">
                       {saving ? 'Saving...' : 'Save Changes'}
                     </Button>
                     <Button 

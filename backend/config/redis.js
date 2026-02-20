@@ -17,25 +17,23 @@ const redis = new Redis({
   maxRetriesPerRequest: 1,
   enableOfflineQueue: false,
   lazyConnect: true,
+  showFriendlyErrorStack: false,
 });
 
 redis.on('connect', () => {
   redisConnected = true;
-  console.log('✅ Redis connected successfully');
+  console.log('✅ Redis connected - Caching enabled');
 });
 
-redis.on('error', (err) => {
+redis.on('error', () => {
   redisConnected = false;
-  if (!errorLogged) {
-    console.log('⚠️  Redis not available - Application will work without caching');
-    errorLogged = true;
-  }
+  // Silently handle error - warning shown on connect failure
 });
 
 // Try to connect
 redis.connect().catch(() => {
   if (!errorLogged) {
-    console.log('⚠️  Redis not available - Application will work without caching');
+    console.log('ℹ️  Redis not configured - Running without cache (optional feature)');
     errorLogged = true;
   }
 });

@@ -45,14 +45,9 @@ const menuItems = [
     icon: FlaskConical,
   },
   {
-    title: 'Roles',
+    title: 'Roles & Permissions',
     href: '/roles',
     icon: Shield,
-  },
-  {
-    title: 'Permissions',
-    href: '/permissions',
-    icon: Lock,
   },
 ];
 
@@ -113,7 +108,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
                     className={cn(
                       'w-full',
                       collapsed ? 'justify-center px-2' : 'justify-start',
-                      isActive && 'bg-blue-100 text-blue-900 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-100'
+                      isActive && 'bg-blue-900 text-white hover:bg-blue-800 dark:bg-blue-900 dark:text-white dark:hover:bg-blue-800'
                     )}
                     title={collapsed ? item.title : undefined}
                   >

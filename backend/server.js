@@ -29,15 +29,6 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/roles', roleRoutes);
 app.use('/api/permissions', permissionRoutes);
 
-console.log('✅ All routes registered successfully');
-console.log('   - /api/auth');
-console.log('   - /api/profile');
-console.log('   - /api/appointments');
-console.log('   - /api/prescriptions');
-console.log('   - /api/contact');
-console.log('   - /api/roles');
-console.log('   - /api/permissions');
-
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'Server is running' });

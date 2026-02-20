@@ -268,7 +268,10 @@ export default function PrescriptionsPage() {
           {/* Prescription Modal */}
           <Dialog open={prescriptionModalOpen} onOpenChange={setPrescriptionModalOpen}>
             <DialogTrigger asChild>
-              <Button onClick={() => { resetForm(); setEditingId(null); }}>
+              <Button 
+                onClick={() => { resetForm(); setEditingId(null); }}
+                className="bg-blue-900 hover:bg-blue-800 text-white"
+              >
                 <Pill className="mr-2 h-4 w-4" />
                 {t('addPrescription')}
               </Button>
@@ -388,7 +391,7 @@ export default function PrescriptionsPage() {
                 </div>
 
                 <div className="flex gap-4 pt-4">
-                  <Button type="submit" className="flex-1">
+                  <Button type="submit" className="flex-1 bg-blue-900 hover:bg-blue-800">
                     {editingId ? t('save') : t('addPrescription')}
                   </Button>
                   <Button type="button" variant="outline" onClick={handleCancel} className="flex-1">

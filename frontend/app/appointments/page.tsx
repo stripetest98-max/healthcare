@@ -233,7 +233,10 @@ export default function AppointmentsPage() {
           {/* Appointment Modal */}
           <Dialog open={appointmentModalOpen} onOpenChange={setAppointmentModalOpen}>
             <DialogTrigger asChild>
-              <Button onClick={() => { resetForm(); setEditingId(null); }}>
+              <Button 
+                onClick={() => { resetForm(); setEditingId(null); }}
+                className="bg-blue-900 hover:bg-blue-800 text-white"
+              >
                 <Calendar className="mr-2 h-4 w-4" />
                 {t('bookNewAppointment')}
               </Button>
@@ -334,7 +337,7 @@ export default function AppointmentsPage() {
                 </div>
 
                 <div className="flex gap-4 pt-4">
-                  <Button type="submit" className="flex-1">
+                  <Button type="submit" className="flex-1 bg-blue-900 hover:bg-blue-800">
                     {editingId ? t('save') : t('bookAppointment')}
                   </Button>
                   <Button type="button" variant="outline" onClick={handleCancel} className="flex-1">
