@@ -20,6 +20,9 @@ const prescriptionRoutes = require('./routes/prescriptionRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 const roleRoutes = require('./routes/roleRoutes');
 const permissionRoutes = require('./routes/permissionRoutes');
+const patientRoutes = require('./routes/patientRoutes');
+const vitalRoutes = require('./routes/vitalRoutes');
+const diagnosisRoutes = require('./routes/diagnosisRoutes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
@@ -28,6 +31,9 @@ app.use('/api/prescriptions', prescriptionRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/roles', roleRoutes);
 app.use('/api/permissions', permissionRoutes);
+app.use('/api/patients', patientRoutes);
+app.use('/api/vitals', vitalRoutes);
+app.use('/api/diagnosis', diagnosisRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

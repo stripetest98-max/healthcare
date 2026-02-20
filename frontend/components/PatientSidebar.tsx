@@ -8,51 +8,57 @@ import { Separator } from '@/components/ui/separator';
 import {
   LayoutDashboard,
   Calendar,
-  Users,
   Pill,
   FlaskConical,
-  Shield,
+  Activity,
+  FileText,
+  User,
 } from 'lucide-react';
 
-interface SidebarProps {
+interface PatientSidebarProps {
   collapsed: boolean;
   onToggle: () => void;
 }
 
-const menuItems = [
+const patientMenuItems = [
   {
     title: 'Dashboard',
-    href: '/dashboard',
+    href: '/patient-dashboard',
     icon: LayoutDashboard,
   },
   {
+    title: 'My Profile',
+    href: '/patient-dashboard/profile',
+    icon: User,
+  },
+  {
     title: 'Appointments',
-    href: '/appointments',
+    href: '/patient-dashboard/appointments',
     icon: Calendar,
   },
   {
-    title: 'Patients',
-    href: '/patients',
-    icon: Users,
-  },
-  {
     title: 'Prescriptions',
-    href: '/prescriptions',
+    href: '/patient-dashboard/prescriptions',
     icon: Pill,
   },
   {
     title: 'Lab Reports',
-    href: '/lab-reports',
+    href: '/patient-dashboard/lab-reports',
     icon: FlaskConical,
   },
   {
-    title: 'Roles & Permissions',
-    href: '/roles',
-    icon: Shield,
+    title: 'Vitals',
+    href: '/patient-dashboard/vitals',
+    icon: Activity,
+  },
+  {
+    title: 'Diagnosis',
+    href: '/patient-dashboard/diagnosis',
+    icon: FileText,
   },
 ];
 
-export function Sidebar({ collapsed, onToggle }: SidebarProps) {
+export function PatientSidebar({ collapsed }: PatientSidebarProps) {
   const pathname = usePathname();
 
   return (
@@ -62,18 +68,17 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
     )}>
       <div className="space-y-4 py-4">
         <div className="px-3 py-2">
-          {/* Logo - Fixed Width */}
           <div className={cn(
             'mb-4 px-4 h-6 flex items-center',
             collapsed ? 'justify-center' : 'justify-start'
           )}>
             {!collapsed ? (
-              <div >
+              <div>
                 <h2 className="text-2xl font-bold tracking-tight text-blue-900 dark:text-blue-400">
                   MediCare
                 </h2>
                 <p className="text-xs text-muted-foreground">
-                  Healthcare Management
+                  Patient Portal
                 </p>
               </div>
             ) : (
@@ -81,24 +86,10 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
             )}
           </div>
 
-          {/* Toggle Button */}
-          {/* <Button
-            variant="ghost"
-            size="icon"
-            onClick={onToggle}
-            className={cn(
-              'absolute -right-3 top-20 z-50 h-6 w-6 rounded-full border bg-background shadow-md',
-              collapsed && 'rotate-180'
-            )}
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </Button> */}
-
           <Separator className="my-4" />
 
-          {/* Menu Items */}
           <div className="space-y-1">
-            {menuItems.map((item) => {
+            {patientMenuItems.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
               

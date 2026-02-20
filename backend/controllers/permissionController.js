@@ -90,7 +90,18 @@ const upsertPermissions = async (req, res) => {
       });
     }
 
-    // Prepare permissions data
+    // First, delete all existing permissions for this role
+    const { error: deleteError } = await supabase
+      .from('permissions')
+      .delete()
+      .eq('role_id', roleId);
+
+    if (deleteError) {
+      console.error('Delete permissions error:', deleteError);
+      throw deleteError;
+    }
+
+    // Then, insert new permissions
     const permissionsData = permissions.map(perm => ({
       role_id: roleId,
       section: perm.section,
@@ -98,24 +109,24 @@ const upsertPermissions = async (req, res) => {
       can_edit: perm.canEdit || false,
       can_delete: perm.canDelete || false,
       is_own: perm.isOwn || false,
+      created_at: new Date().toISOString(),
       updated_at: new Date().toISOString()
     }));
 
-    // Upsert permissions
-    const { data: upsertedPermissions, error } = await supabase
+    const { data: insertedPermissions, error: insertError } = await supabase
       .from('permissions')
-      .upsert(permissionsData, {
-        onConflict: 'role_id,section',
-        ignoreDuplicates: false
-      })
+      .insert(permissionsData)
       .select();
 
-    if (error) throw error;
+    if (insertError) {
+      console.error('Insert permissions error:', insertError);
+      throw insertError;
+    }
 
     res.json({
       success: true,
       message: 'Permissions updated successfully',
-      data: { permissions: upsertedPermissions }
+      data: { permissions: insertedPermissions }
     });
   } catch (error) {
     console.error('Upsert permissions error:', error);

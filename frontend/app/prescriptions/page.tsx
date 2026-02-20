@@ -391,11 +391,11 @@ export default function PrescriptionsPage() {
                 </div>
 
                 <div className="flex gap-4 pt-4">
-                  <Button type="submit" className="flex-1 bg-blue-900 hover:bg-blue-800">
-                    {editingId ? t('save') : t('addPrescription')}
-                  </Button>
                   <Button type="button" variant="outline" onClick={handleCancel} className="flex-1">
                     {t('cancel')}
+                  </Button>
+                  <Button type="submit" className="flex-1 bg-blue-900 hover:bg-blue-800">
+                    {editingId ? t('save') : t('addPrescription')}
                   </Button>
                 </div>
               </form>

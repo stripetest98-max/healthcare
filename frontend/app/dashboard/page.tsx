@@ -359,9 +359,6 @@ export default function DashboardPage() {
                   </div>
 
                   <div className="flex gap-4 pt-4">
-                    <Button type="submit" disabled={saving} className="flex-1 bg-blue-900 hover:bg-blue-800">
-                      {saving ? 'Saving...' : 'Save Changes'}
-                    </Button>
                     <Button 
                       type="button" 
                       variant="outline" 
@@ -369,6 +366,9 @@ export default function DashboardPage() {
                       className="flex-1"
                     >
                       Cancel
+                    </Button>
+                    <Button type="submit" disabled={saving} className="flex-1 bg-blue-900 hover:bg-blue-800">
+                      {saving ? 'Saving...' : 'Save Changes'}
                     </Button>
                   </div>
                 </form>

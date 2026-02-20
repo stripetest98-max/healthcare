@@ -407,3 +407,223 @@ export const deletePermissionsByRole = async (accessToken: string, roleId: strin
 
   return response.json();
 };
+
+// ============ PATIENTS API ============
+
+// Get all patients
+export const getPatients = async (accessToken: string): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/patients`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+  });
+
+  return response.json();
+};
+
+// Get single patient
+export const getPatientById = async (accessToken: string, patientId: string): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/patients/${patientId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+  });
+
+  return response.json();
+};
+
+// Get patient by user ID
+export const getPatientByUserId = async (accessToken: string, userId: string): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/patients/user/${userId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+  });
+
+  return response.json();
+};
+
+// Create patient
+export const createPatient = async (accessToken: string, patientData: any): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/patients`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(patientData),
+  });
+
+  return response.json();
+};
+
+// Update patient
+export const updatePatient = async (accessToken: string, patientId: string, patientData: any): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/patients/${patientId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(patientData),
+  });
+
+  return response.json();
+};
+
+// Delete patient
+export const deletePatient = async (accessToken: string, patientId: string): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/patients/${patientId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+  });
+
+  return response.json();
+};
+
+// ============ VITALS API ============
+
+// Get vitals by patient
+export const getVitalsByPatient = async (accessToken: string, patientId: string): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/vitals/patient/${patientId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+  });
+
+  return response.json();
+};
+
+// Get single vital
+export const getVitalById = async (accessToken: string, vitalId: string): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/vitals/${vitalId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+  });
+
+  return response.json();
+};
+
+// Create vital
+export const createVital = async (accessToken: string, vitalData: any): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/vitals`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(vitalData),
+  });
+
+  return response.json();
+};
+
+// Update vital
+export const updateVital = async (accessToken: string, vitalId: string, vitalData: any): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/vitals/${vitalId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(vitalData),
+  });
+
+  return response.json();
+};
+
+// Delete vital
+export const deleteVital = async (accessToken: string, vitalId: string): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/vitals/${vitalId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+  });
+
+  return response.json();
+};
+
+// ============ DIAGNOSIS API ============
+
+// Get diagnosis by patient
+export const getDiagnosisByPatient = async (accessToken: string, patientId: string): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/diagnosis/patient/${patientId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+  });
+
+  return response.json();
+};
+
+// Get single diagnosis
+export const getDiagnosisById = async (accessToken: string, diagnosisId: string): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/diagnosis/${diagnosisId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+  });
+
+  return response.json();
+};
+
+// Create diagnosis
+export const createDiagnosis = async (accessToken: string, diagnosisData: any): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/diagnosis`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(diagnosisData),
+  });
+
+  return response.json();
+};
+
+// Update diagnosis
+export const updateDiagnosis = async (accessToken: string, diagnosisId: string, diagnosisData: any): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/diagnosis/${diagnosisId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(diagnosisData),
+  });
+
+  return response.json();
+};
+
+// Delete diagnosis
+export const deleteDiagnosis = async (accessToken: string, diagnosisId: string): Promise<ApiResponse> => {
+  const response = await fetch(`${API_URL}/diagnosis/${diagnosisId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`,
+    },
+  });
+
+  return response.json();
+};

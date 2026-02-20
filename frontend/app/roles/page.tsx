@@ -321,7 +321,15 @@ export default function RolesPage() {
 
   const handlePermissionSave = async () => {
     const accessToken = localStorage.getItem('accessToken');
-    if (!accessToken || !selectedRoleId) return;
+    if (!accessToken || !selectedRoleId) {
+      toast.error('Please select a role');
+      return;
+    }
+
+    if (permissionFormData.length === 0) {
+      toast.error('Please add at least one section');
+      return;
+    }
 
     try {
       const result = await upsertPermissions(
@@ -339,11 +347,14 @@ export default function RolesPage() {
       if (result.success) {
         toast.success('Permissions saved successfully');
         setPermissionModalOpen(false);
+        setSelectedRoleId('');
+        setPermissionFormData([]);
         loadPermissions();
       } else {
         toast.error(result.message);
       }
     } catch (error) {
+      console.error('Save permission error:', error);
       toast.error('Failed to save permissions');
     }
   };
@@ -367,6 +378,10 @@ export default function RolesPage() {
   };
 
   const handleRemovePermissionSection = (index: number) => {
+    if (permissionFormData.length === 1) {
+      toast.error('At least one section is required');
+      return;
+    }
     setPermissionFormData(prev => prev.filter((_, i) => i !== index));
   };
 
@@ -481,9 +496,6 @@ export default function RolesPage() {
                       </div>
 
                       <div className="flex gap-4 pt-4">
-                        <Button type="submit" className="flex-1 bg-blue-900 hover:bg-blue-800">
-                          Save changes
-                        </Button>
                         <Button 
                           type="button" 
                           variant="outline" 
@@ -495,6 +507,9 @@ export default function RolesPage() {
                           className="flex-1"
                         >
                           Cancel
+                        </Button>
+                        <Button type="submit" className="flex-1 bg-blue-900 hover:bg-blue-800">
+                          Save changes
                         </Button>
                       </div>
                     </form>
@@ -514,7 +529,6 @@ export default function RolesPage() {
                       <TableRow>
                         <TableHead>Name</TableHead>
                         <TableHead>Description</TableHead>
-                        <TableHead>Status</TableHead>
                         <TableHead>Created</TableHead>
                         <TableHead className="text-right">Actions</TableHead>
                       </TableRow>
@@ -529,11 +543,6 @@ export default function RolesPage() {
                             </div>
                           </TableCell>
                           <TableCell>{role.description || '-'}</TableCell>
-                          <TableCell>
-                            <Badge variant={role.is_active ? 'default' : 'secondary'}>
-                              {role.is_active ? 'Active' : 'Inactive'}
-                            </Badge>
-                          </TableCell>
                           <TableCell>
                             {new Date(role.created_at).toLocaleDateString()}
                           </TableCell>
@@ -745,13 +754,6 @@ export default function RolesPage() {
                       {/* Action Buttons */}
                       <div className="flex gap-3 pt-4 border-t">
                         <Button 
-                          onClick={handlePermissionSave} 
-                          className="flex-1 h-11 bg-blue-900 hover:bg-blue-800"
-                          disabled={!selectedRoleId || permissionFormData.length === 0}
-                        >
-                          Save Permissions
-                        </Button>
-                        <Button 
                           type="button" 
                           variant="outline" 
                           onClick={() => {
@@ -762,6 +764,13 @@ export default function RolesPage() {
                           className="flex-1 h-11"
                         >
                           Cancel
+                        </Button>
+                        <Button 
+                          onClick={handlePermissionSave} 
+                          className="flex-1 h-11 bg-blue-900 hover:bg-blue-800"
+                          disabled={!selectedRoleId || permissionFormData.length === 0}
+                        >
+                          Save Permissions
                         </Button>
                       </div>
                     </div>
